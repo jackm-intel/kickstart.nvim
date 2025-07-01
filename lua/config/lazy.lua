@@ -120,6 +120,8 @@ require 'config.autocmds'
 
 require('lazy').setup {
   spec = {
+    { import = 'base' },
+    { import = 'extras' },
     { import = 'plugins' },
   },
   defaults = {
