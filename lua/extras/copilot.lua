@@ -33,7 +33,7 @@ return {
                 forward = true,
               },
             },
-    },
+          },
         },
       },
     },
