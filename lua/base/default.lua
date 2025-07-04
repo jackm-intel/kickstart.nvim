@@ -390,7 +390,7 @@ return {
   },
   {
     'stevearc/conform.nvim',
-    lazy = true,
+    lazy = false,
     cmd = 'ConformInfo',
     keys = {
       {
@@ -435,6 +435,20 @@ return {
         },
       }
       return opts
+    end,
+    config = function(_, opts)
+      require('conform').setup(opts)
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = '*',
+        callback = function(args)
+          local conform = require 'conform'
+          -- Check if formatting is available for this buffer
+          local formatters = conform.list_formatters(args.buf)
+          if #formatters > 0 then
+            conform.format { bufnr = args.buf }
+          end
+        end,
+      })
     end,
   },
   {
@@ -515,9 +529,9 @@ return {
         ctx.dirname = vim.fn.fnamemodify(ctx.filename, ':h')
         names = vim.tbl_filter(function(name)
           local linter = lint.linters[name]
-          if not linter then
-            LazyVim.warn('Linter not found: ' .. name, { title = 'nvim-lint' })
-          end
+          -- if not linter then
+          --   LazyVim.warn('Linter not found: ' .. name, { title = 'nvim-lint' })
+          -- end
           return linter and not (type(linter) == 'table' and linter.condition and not linter.condition(ctx))
         end, names)
 

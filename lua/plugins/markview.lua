@@ -1,9 +1,5 @@
 return {
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    enabled = false,
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'OXY2DEV/markview.nvim',

@@ -106,7 +106,7 @@ map('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 
 -- formatting
 map({ 'n', 'v' }, '<leader>cf', function()
-  LazyVim.format { force = true }
+  require('conform').format { lsp_fallback = true }
 end, { desc = 'Format' })
 
 -- diagnostic
@@ -214,4 +214,4 @@ end
 map('n', '<leader>snH', '<cmd>lua Snacks.notifier.show_history()<cr>', { desc = 'Snacks Notification History' })
 map('n', '<leader>C', '<leader>C', { desc = 'CodeCompanion' })
 map('n', '<leader>Cc', '<cmd>CodeCompanionChat Toggle<cr>', { desc = 'Chat with CodeCompanion' })
-map('n', '<leader>uT', "<cmd>lua require('nvchad.themes').open()<cr>", { desc = 'NVChad Theme Picker' })
+map('n', '<leader>uC', "<cmd>lua require('nvchad.themes').open()<cr>", { desc = 'NVChad Theme Picker' })

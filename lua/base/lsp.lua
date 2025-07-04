@@ -45,6 +45,7 @@ return {
           -- tsserver = {},
           -- pyright = {},
         },
+        servers_no_install = {},
       }
     end,
     config = function(_, opts)
@@ -53,6 +54,10 @@ return {
       require('mason-lspconfig').setup {
         ensure_installed = vim.tbl_keys(opts.servers), -- Ensure all servers in opts are installed
       }
+
+      local servers = opts.servers or {}
+      servers = vim.tbl_extend('force', servers, opts.servers_no_install or {})
+      opts.servers = servers
 
       -- Configure diagnostics
       vim.diagnostic.config(opts.diagnostics)
